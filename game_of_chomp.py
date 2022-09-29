@@ -30,7 +30,10 @@ def print_chocolate_bar(M):
         print("\n")
         #After every row, a new line is printed
         for j in range(len(M[i])):
-            print("{:3s}".format(M[i][j]), end='')
+            if len(M[-1])>2:
+                print("{:4s}".format(M[i][j]), end='')
+            else:
+                print("{:3s}".format(M[i][j]), end='')
             #Along each list, every element M[i][j] is
             #printed, with a minimum width of 3, aligned to the right
     return None
@@ -91,12 +94,12 @@ def main():
             print_chocolate_bar(M)
             print('\n')
             if check_winner(M)==True:
-                print('Spelet är slut,', spelare+1, 'är vinnaren!')
+                print('Spelet är slut, spelare', spelare+1, 'är vinnaren!')
                 re = input('Vill ni spela igen?(j/n)\n')
                 if re != 'n':
                     return(main())
                 else:
-                    print('Tack för att ni spelade mitt spel .3')
+                    print('Tack för att ni spelade mitt spel :3')
                     break
             else:
                 spelare=(spelare+1)%max_spelare
