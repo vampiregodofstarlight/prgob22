@@ -80,26 +80,26 @@ def main():
     M=create_chocolate_bar(row_board, col_board)
     print_chocolate_bar(M)
     print('\n')
-    max_spelare = 2
-
-    spelare = 0
 
     while check_winner(M) == False:
+        max_spelare = 2
+        spelare = 0
         while True:
-            print("spelare {} turn".format(spelare+1))
-            #input("enter for next {}".format("player" if player + 1 < max_players else "round"))
-            spelare = (spelare + 1) % max_spelare
+            print("Spelare {} väljer ruta.".format(spelare+1))
             r,c=ask_cell_number(M)
             chomp(M,r,c)
             print_chocolate_bar(M)
-            #print('\n',M)
             print('\n')
             if check_winner(M)==True:
-                print('spelare',(spelare + 1) % max_spelare, 'vann!')
-                break
-            
-            
-        
+                print('Spelet är slut,', spelare+1, 'är vinnaren!')
+                re = input('Vill ni spela igen?(j/n)\n')
+                if re != 'n':
+                    return(main())
+                else:
+                    print('Tack för att ni spelade mitt spel .3')
+                    break
+            else:
+                spelare=(spelare+1)%max_spelare
 main()
 
 
