@@ -12,6 +12,14 @@ def read_file(tv_file):
     tvlist = []
     for i in tvfile:
         tvlist.append(i)
+    tvfile.close()
     return(tvlist)
         
 print(read_file('allatv.txt'))
+
+
+def write_file(TVlist, tv_file):
+    tvfile = open(tv_file, 'w')
+    for i in TVlist:
+        tvfile.write(i+'\n')
+    tvfile.close()
