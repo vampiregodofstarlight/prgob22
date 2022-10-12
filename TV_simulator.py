@@ -35,11 +35,43 @@ def write_file(tvlist, tv_file):
     tvfile.close()
     
 
-tvlista = read_file("allatv.txt")
-tvlista[0].change_channel(1)
-tvlista[0].decrease_volume()   
-write_file(tvlista, "allatv.txt")    
-for tv in tvlista: print(tv) 
+def change_channel(tv_obj):
+    try:
+        channel = int(input("Choose channel:\n"))
+        tv_obj.change_channel(channel)
+    except ValueError:
+        print('Invalid input')
+        return(change_channel(tv_obj))
+
+def increase_volume(tv_obj):
+    tv_obj.increase_volume()
+        
+def decrease_volume(tv_obj):
+    tv_obj.decrease_volume()
+    
+def adjust_TV_menu():
+    try:
+        options=list(range(1,5))
+        for i in options:
+            if i == 1:
+                print(str(i)+'.','Change channel','\n')
+            elif i == 2:
+                print(str(i)+'.','Increase volume','\n')
+            elif i == 3:
+                print(str(i)+'.','Decrease volume','\n')
+            elif i == 4:
+                print(str(i)+'.','Return to main menu','\n')
+            
+        choose_input = int(input('Choose alternative: '))
+        for i in range(len(options)):
+            if choose_input == options[i]:
+                return_input = choose_input
+        return(return_input)
+    except Exception:
+        print('Invalid input, try again!')
+        return(adjust_TV_menu())
+        
+def select_TV_menu(tv_list):
     
     
     
