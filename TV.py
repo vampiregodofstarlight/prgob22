@@ -38,15 +38,9 @@ class TV:
         return f'{self.tv_name}, channel: {self.current_channel}, volume: {self.current_volume}'
     
     def str_for_file(self):
-        return f'{self.tv_name},{self.max_channel},{self.current_channel},{self.max_volume},{self.current_volume}'
+        return f'{self.tv_name},{self.current_volume},{self.current_channel},{self.max_volume},{self.max_channel}'
     
     
     
-tv = TV('Living room TV', 5,22,10,9)
+tv = TV('Living room TV', 2,22,7,9)
 tv2 = TV('Bed room TV', 50,7,20,4)
-#print(tv.increase_volume())
-#print(tv)
-#print(tv.increase_volume())
-#print(tv)
-#print(tv.change_channel(3))
-#print(tv)
