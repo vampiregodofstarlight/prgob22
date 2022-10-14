@@ -134,8 +134,3 @@ def main():
             #after each iteration, the textfile is cleared and
             #the updated TV_list is added to the textfile 
 main()
-          
-#for tv in tvlist: print(tv)
-
-#tvlist[0].change_channel(1)
-#for tv in tvlist: print(tv)
