@@ -33,16 +33,24 @@ def write_file(tvlist, tv_file):
         tvfile.write(tvlist[i].str_for_file()+'\n')
     tvfile.close()
  
+    
+def channel_input(tv_obj):
+    channel = int(input('Choose channel: '))
+    if channel < 1:
+        raise Exception('Channel cant be negative')
+    if channel > tv_obj.max_channel:
+        raise Exception('Max channel is ', tv_obj.max_channel)
+    return(channel)
+#"channel_input" raises exceptions for when user input is not within correct range           
 
 def change_channel(tv_obj):
     try:
-        channel = int(input("Choose channel:\n"))
-        tv_obj.change_channel(channel)
-    except ValueError:
-        print('Invalid input')
+        tv_obj.change_channel(channel_input(tv_obj))
+        #returns "channel_input"(integer)
+    except Exception:
+        print( f'Channel must be in range 1-{tv_obj.max_channel}, try again!')
         return(change_channel(tv_obj))
-#Since the method "change_channel" handles integer inputs out of range
-#The try-except statement instead deals with other invalid inputs(like strings)
+    #Exceptions raised in "channel_input" are caught here
 
 def increase_volume(tv_obj):
     tv_obj.increase_volume()
@@ -54,9 +62,9 @@ def decrease_volume(tv_obj):
 def choose_adjust_options():
     adjust_input = int(input('Choose alternative: '))
     if adjust_input < 1:
-      raise Exception("lower than 1")
+      raise ValueError("lower than 1")
     if adjust_input > 4:
-      raise Exception("higher than 4")
+      raise ValueError("higher than 4")
     return adjust_input
 #Exceptions for incorrect inputs used in "adjust_TV_menu" are raised here
 
@@ -76,6 +84,7 @@ def adjust_TV_menu():
   
   try:
     return choose_adjust_options()
+    #"choose_adjust_options" is called and returns an integer
   except:
     print('Invalid input, try again!')
     return adjust_TV_menu()
@@ -118,7 +127,7 @@ def main():
             break
         #if select_TV_menu() returns None, the while True loop breaks and
         #the program quits
-        while selected_TV != None:
+        while True:
             print('\n')
             print(str(selected_TV))
             adjust_variable = adjust_TV_menu()
