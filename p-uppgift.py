@@ -44,7 +44,7 @@ def read_cinema_file():
     cin_list = []
     #Empty list to store file info
     try:
-        cin_file = open(file_input+'.txt', 'r')
+        cin_file = open(file_input+'.txt', 'r', encoding="utf-8")
         for line in cin_file:
             lines = line.rstrip()
             cin_list.append(lines)
@@ -61,19 +61,26 @@ def cinema_reservations(cin_list):
     for i in range(len(cin_list)):
         print(f'{cin_list[i].cinema_name}, {cin_list[i].reservations}%')
 
+def read_int(sstr):
+    try:
+        return int(input(sstr))
+    except ValueError:
+        print("Input must be an integer, try again!")
+        return read_int(sstr)
+
     
 def create_cinema_obj(cin_list): #FELKONTROLL
     cin_obj_list = []
     for i in range(len(cin_list)):
         cin_split = cin_list[i].split(',')
-        amount_sold_pen = input(f'How many pensioner tickets were sold by {cin_split[0]}?')
-        amount_sold_adu = input(f'How many adult tickets were sold by {cin_split[0]}?')
-        amount_sold_chi = input(f'How many child tickets were sold by {cin_split[0]}?')
+        amount_sold_pen = read_int((f'How many pensioner tickets were sold by {cin_split[0]}?'))
+        amount_sold_adu = read_int((f'How many adult tickets were sold by {cin_split[0]}?'))
+        amount_sold_chi = read_int((f'How many child tickets were sold by {cin_split[0]}?'))
 
-        reservations = round((int(amount_sold_pen) + int(amount_sold_adu) +int(amount_sold_chi))*100/int(cin_split[1]), 2)
+        reservations = round((amount_sold_pen + amount_sold_adu + amount_sold_chi)*100/int(cin_split[1]), 2)
         cin_obj = Cinema(cin_split[0], cin_split[1], cin_split[2], cin_split[3], cin_split[4], amount_sold_pen, amount_sold_adu, amount_sold_chi, reservations)
         cin_obj_list.append(cin_obj)
-    return cin_obj_list
+        return cin_obj_list
     
 def main():
     intro()
